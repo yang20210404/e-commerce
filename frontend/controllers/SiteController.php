@@ -59,7 +59,7 @@ class SiteController extends \frontend\base\Controller
                     'signup' => ['GET', 'POST'],
                     'detail' => ['GET'],
                     'profile' => ['GET', 'POST'],
-                    'reset-password' => ['GET','POST']
+                    'reset-password' => ['POST']
                 ],
             ],
         ];

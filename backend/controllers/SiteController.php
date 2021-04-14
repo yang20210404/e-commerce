@@ -83,6 +83,7 @@ class SiteController extends Controller
             return $this->redirect(['/product/index']);
         } else {
             Yii::$app->user->logout();
+            $model->addError('password', '帳號或密碼錯誤！');
             $model->password = '';
 
             return $this->render('login', [

@@ -53,12 +53,12 @@ class LoginForm extends Model
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-            if (!$user || !$user->validatePassword($this->password) || !$user->validateStatus($user->status)) {
+            if ($user && $user->validatePassword($this->password)) {
                 if (!$user->validateStatus($user->status)) {
                     $this->addError($attribute, '你已被凍結！');
-                } else {
-                    $this->addError($attribute, '帳號或密碼錯誤！');
                 }
+            } else {
+                $this->addError($attribute, '帳號或密碼錯誤！');
             }
         }
     }
