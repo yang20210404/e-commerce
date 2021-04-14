@@ -25,17 +25,22 @@ $this->title = '個人資料';
                     'title' => '重設密碼',
                     'toggleButton' => [
                         'label' => '重設密碼',
-                        'class' => 'btn btn-success'
+                        'class' => 'btn btn-success btn-reset-password-modal'
                     ]
                 ]); ?>
 
-                <?php $form = \yii\bootstrap4\ActiveForm::begin(); ?>
-                <?= $form->field($model, 'password')->passwordInput() ?>
-                <?= $form->field($model, 'password_repeat')->passwordInput() ?>
-                <div class="form-group">
-                    <?= Html::submitButton('確認', ['class' => 'btn btn-success']) ?>
-                </div>
-                <?php \yii\bootstrap4\ActiveForm::end(); ?>
+                    <?php $form = \yii\bootstrap4\ActiveForm::begin(); ?>
+                        <?= $form->field($model, 'old_password')->passwordInput() ?>
+                        <?= $form->field($model, 'password')->passwordInput() ?>
+                        <?= $form->field($model, 'password_repeat')->passwordInput() ?>
+
+                        <div class="form-group">
+                            <?= Html::a('確認', \yii\helpers\Url::to(['/site/reset-password', 'model' => $model]), [
+                                    'class' => 'btn btn-success btn-reset-password'
+                            ]) ?>
+                        </div>
+                    <?php \yii\bootstrap4\ActiveForm::end(); ?>
+
                 <?php \yii\bootstrap4\Modal::end();  ?>
             </div>
 

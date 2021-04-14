@@ -11,6 +11,7 @@ use common\models\User;
  */
 class ResetPasswordForm extends Model
 {
+    public $old_password;
     public $password;
     public $password_repeat;
 
@@ -20,10 +21,11 @@ class ResetPasswordForm extends Model
     public function rules()
     {
         return [
-            ['password', 'required', 'message' => '密碼不能為空'],
+            ['old_password', 'string'],
+            ['password', 'required', 'message' => '新密碼不能為空'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
 
-            ['password_repeat', 'required', 'message' => '密碼確認不能為空'],
+            ['password_repeat', 'required', 'message' => '新密碼確認不能為空'],
             ['password_repeat', 'string'],
             ['password_repeat', 'compare', 'compareAttribute' => 'password', 'message' => '兩次輸入的密碼不相符'],
         ];
@@ -35,9 +37,18 @@ class ResetPasswordForm extends Model
     public function attributeLabels()
     {
         return [
-            'password' => '密碼',
-            'password_repeat' => '密碼確認',
+            'old_password' => '目前密碼',
+            'password' => '新密碼',
+            'password_repeat' => '新密碼確認',
         ];
+    }
+
+    public function validatePassword()
+    {
+        return Yii::$app->security->validatePassword(
+            $this->old_password ? $this->old_password : '密碼為空',
+            Yii::$app->user->identity->password
+        );
     }
 
     /**

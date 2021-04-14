@@ -6,6 +6,8 @@ use common\models\User;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\data\ActiveDataProvider;
+use yii\filters\ContentNegotiator;
+use yii\helpers\VarDumper;
 use yii\web\BadRequestHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -13,6 +15,7 @@ use common\models\LoginForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 
 /**
@@ -28,17 +31,23 @@ class SiteController extends \frontend\base\Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['signup', 'login', 'index', 'detail', 'logout'],
                 'rules' => [
                     [
                         'actions' => ['signup', 'login', 'index', 'detail'],
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'profile', 'reset-password'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                ],
+            ],
+            [
+                'class' => ContentNegotiator::class,
+                'only' => ['reset-password'],
+                'formats' => [
+                    'application/json' => Response::FORMAT_JSON,
                 ],
             ],
             'verbs' => [
@@ -49,6 +58,8 @@ class SiteController extends \frontend\base\Controller
                     'logout' => ['POST'],
                     'signup' => ['GET', 'POST'],
                     'detail' => ['GET'],
+                    'profile' => ['GET', 'POST'],
+                    'reset-password' => ['GET','POST']
                 ],
             ],
         ];
@@ -108,7 +119,7 @@ class SiteController extends \frontend\base\Controller
             Yii::$app->user->identity->last_login_at = time();
             Yii::$app->user->identity->save();
 
-            return $this->goBack();
+            return $this->goHome();
         } else {
             $model->password = '';
 
@@ -166,38 +177,30 @@ class SiteController extends \frontend\base\Controller
      * @return mixed
      * @throws BadRequestHttpException
      */
-    public function actionResetPassword($token)
+    public function actionResetPassword()
     {
-        try {
-            $model = new ResetPasswordForm($token);
-        } catch (InvalidArgumentException $e) {
-            throw new BadRequestHttpException($e->getMessage());
+        $model = new ResetPasswordForm();
+
+        if ($model->load(['ResetPasswordForm' => Yii::$app->request->post()]) && $model->validatePassword()) {
+            if ($model->validate() && $model->resetPassword()) {
+                Yii::$app->session->setFlash('success', '密碼修改成功！！ 請重新登入');
+
+                return $this->redirect(['profile']);
+            }
+        } else {
+            $model->addError('old_password', '密碼錯誤！');
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', 'New password saved.');
-
-            return $this->goHome();
-        }
-
-        return $this->render('resetPassword', [
-            'model' => $model,
-        ]);
+        return $model->errors;
     }
 
     public function actionProfile()
     {
         $user = User::findOne(Yii::$app->user->id);
         $model = new ResetPasswordForm();
-        $user->save();
-//        if ($user->load(Yii::$app->request->post()) && $user->save()) {
-//            Yii::$app->session->setFlash('success', '資料修改成功！！');
-//
-//            return $this->redirect(['profile']);
-//        }
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', '密碼修改成功！!!!！');
+        if ($user->load(Yii::$app->request->post()) && $user->save()) {
+            Yii::$app->session->setFlash('success', '資料修改成功！！');
 
             return $this->redirect(['profile']);
         }

@@ -39,7 +39,7 @@ $this->title = '購物車';
                             <td>
                                 <?= \yii\helpers\Html::a('移除', ['/cart/delete', 'id' => $item['id']], [
                                     'class' => 'btn btn-outline-danger btn-sm',
-                                    'data-method' => 'delete',
+                                    'data-method' => 'DELETE',
                                     'data-confirm' => '確定要刪除嗎?'
                                 ]) ?>
                             </td>

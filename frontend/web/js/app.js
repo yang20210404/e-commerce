@@ -3,6 +3,8 @@ $(function(){
     const $addToCart = $('.btn-add-to-cart');
     const $itemQuantities = $('.item-quantity');
     const $orderPay = $('.btn-order-pay');
+    const $resetPassword = $('.btn-reset-password');
+    const $resetPasswordModal = $('.btn-reset-password-modal');
 
     $addToCart.click(ev => {
         ev.preventDefault();
@@ -58,6 +60,56 @@ $(function(){
             success: function(){
                 alert('付款成功！！');
                 $this.parent().html('<span class="badge badge-success">已付款</span>');
+            }
+        })
+    })
+
+    $resetPasswordModal.click(ev => {
+        $('.form-control').eq(1).removeClass('is-invalid');
+        $('.form-control').eq(2).removeClass('is-invalid');
+        $('.form-control').eq(3).removeClass('is-invalid');
+        $('.invalid-feedback').eq(1).text('');
+        $('.invalid-feedback').eq(2).text('');
+        $('.invalid-feedback').eq(3).text('');
+    })
+
+    $resetPassword.click(ev => {
+        ev.preventDefault();
+
+        const $this = $(ev.target);
+        const old_password = $('#resetpasswordform-old_password').val();
+        const password = $('#resetpasswordform-password').val();
+        const password_repeat = $('#resetpasswordform-password_repeat').val();
+
+        $.ajax({
+            method: 'POST',
+            url: $this.attr('href'),
+            data: {old_password, password, password_repeat},
+            success: function(result){
+                console.log(result);
+                if (result['old_password']) {
+                    $('#resetpasswordform-password').val('');
+                    $('.invalid-feedback').eq(2).text('');
+                    $('.form-control').eq(2).removeClass('is-invalid');
+
+                    $('#resetpasswordform-password_repeat').val('');
+                    $('.invalid-feedback').eq(3).text('');
+                    $('.form-control').eq(3).removeClass('is-invalid');
+
+                    $('.form-control').eq(1).addClass('is-invalid');
+                    $('.invalid-feedback').eq(1).text(result['old_password']);
+                } else {
+                    $('.form-control').eq(1).removeClass('is-invalid');
+                    $('.invalid-feedback').eq(1).text('');
+
+                    $('.invalid-feedback').eq(2).text('');
+                    $('.form-control').eq(2).addClass('is-invalid');
+                    $('.invalid-feedback').eq(2).text(result['password']);
+
+                    $('.invalid-feedback').eq(3).text('');
+                    $('.form-control').eq(3).addClass('is-invalid');
+                    $('.invalid-feedback').eq(3).text(result['password_repeat']);
+                }
             }
         })
     })
