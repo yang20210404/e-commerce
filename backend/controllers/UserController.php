@@ -2,13 +2,16 @@
 
 namespace backend\controllers;
 
+use common\models\CashFlow;
 use Yii;
 use common\models\User;
 use backend\models\search\UserSearch;
 use yii\filters\AccessControl;
+use yii\filters\ContentNegotiator;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -25,10 +28,17 @@ class UserController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'update', 'active', 'block'],
+                        'actions' => ['index', 'update', 'active', 'block', 'deposit'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                ],
+            ],
+            [
+                'class' => ContentNegotiator::class,
+                'only' => ['deposit'],
+                'formats' => [
+                    'application/json' => Response::FORMAT_JSON,
                 ],
             ],
             'verbs' => [
@@ -38,6 +48,7 @@ class UserController extends Controller
                     'update' => ['GET', 'POST'],
                     'active' => ['POST'],
                     'block' => ['POST'],
+                    'deposit' => ['POST'],
                 ],
             ],
         ];
@@ -67,14 +78,26 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $user = $this->findModel($id);
+        $model = new CashFlow();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($user->load(Yii::$app->request->post()) && $user->save()) {
+            Yii::$app->session->setFlash('success', '用戶資料修改成功！！');
+
             return $this->redirect(['index']);
         }
 
+        if ($model->load(Yii::$app->request->post()) && $model->deposit()) {
+            Yii::$app->session->setFlash('success', '充值成功！！');
+
+            return $this->redirect(['index']);
+        } else {
+            Yii::$app->session->setFlash('success', '充值失敗！！ 請再試一次');
+        }
+
         return $this->render('update', [
-            'model' => $model,
+            'user' => $user,
+            'model' => $model
         ]);
     }
 
@@ -94,6 +117,12 @@ class UserController extends Controller
         $user = User::findOne(['id' => $id]);
         $user->status = User::STATUS_INACTIVE;
         $user->save();
+    }
+
+    public function actionDeposit()
+    {
+        return Yii::$app->request->post();
+
     }
 
     /**

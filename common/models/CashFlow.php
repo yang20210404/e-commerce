@@ -2,8 +2,6 @@
 
 namespace common\models;
 
-use Yii;
-use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -11,7 +9,7 @@ use yii\db\ActiveRecord;
  * This is the model class for table "cash_flow".
  *
  * @property int $id
- * @property int $user_id
+ * @property int $created_by
  * @property float $money
  * @property string|null $description
  * @property int $type
@@ -41,12 +39,6 @@ class CashFlow extends ActiveRecord
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
                 ],
             ],
-            [
-                'class' => BlameableBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_by'],
-                ],
-            ],
         ];
     }
 
@@ -56,9 +48,10 @@ class CashFlow extends ActiveRecord
     public function rules()
     {
         return [
-            [['created_by', 'money', 'type'], 'required'],
+            [['created_by', 'type'], 'required'],
+            [['money'], 'required', 'message' => '金額不得為空'],
             [['created_by', 'type', 'created_at'], 'integer'],
-            [['money'], 'number'],
+            [['money'], 'integer', 'message' => '金額必須為整數'],
             [['description'], 'string'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
         ];
@@ -96,5 +89,28 @@ class CashFlow extends ActiveRecord
     public static function find()
     {
         return new \common\models\query\CashFlowQuery(get_called_class());
+    }
+
+    public function deposit()
+    {
+        $this->type = self::TYPE_DEPOSIT;
+        $this->description = '管理員後台充值';
+
+        $transaction = \Yii::$app->db->beginTransaction();
+
+        if (parent::save($runValidation = true, $attributeNames = null)) {
+            $user = User::findOne($this->created_by);
+            $user->balance += $this->money;
+
+            if ($user->save()) {
+                $transaction->commit();
+
+                return true;
+            }
+        }
+
+        $transaction->rollBack();
+
+        return false;
     }
 }
