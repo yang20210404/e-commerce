@@ -48,7 +48,7 @@ AppAsset::register($this);
                 'encode' => false
             ],
             ['label' => '訂單', 'url' => ['/order/index']],
-            ['label' => '流水', 'url' => ['/cash/index']],
+            ['label' => '流水', 'url' => ['/cash-flow/index']],
             ['label' => '個人資料', 'url' => ['/site/profile']],
             ['label' => '|'],
             [

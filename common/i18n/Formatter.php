@@ -74,4 +74,13 @@ class Formatter extends \yii\i18n\Formatter
                 ]);
         }
     }
+
+    public function asCashFlowType($type)
+    {
+        if ($type == \common\models\CashFlow::TYPE_DEPOSIT) {
+            return \yii\bootstrap4\Html::tag('span', '支出', ['class' => 'badge badge-success']);
+        } else {
+            return \yii\bootstrap4\Html::tag('span', '入款', ['class' => 'badge badge-danger']);
+        }
+    }
 }

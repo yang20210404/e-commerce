@@ -182,7 +182,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getCashFlows()
     {
-        return $this->hasMany(CashFlow::className(), ['user_id' => 'id']);
+        return $this->hasMany(CashFlow::className(), ['created_by' => 'id']);
     }
 
     /**

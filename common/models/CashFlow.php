@@ -3,6 +3,9 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "cash_flow".
@@ -16,8 +19,11 @@ use Yii;
  *
  * @property User $user
  */
-class CashFlow extends \yii\db\ActiveRecord
+class CashFlow extends ActiveRecord
 {
+    const TYPE_DEPOSIT = 9;
+    const TYPE_WITHDRAW = 10;
+
     /**
      * {@inheritdoc}
      */
@@ -26,17 +32,35 @@ class CashFlow extends \yii\db\ActiveRecord
         return 'cash_flow';
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
+                ],
+            ],
+            [
+                'class' => BlameableBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_by'],
+                ],
+            ],
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['user_id', 'money', 'type'], 'required'],
-            [['user_id', 'type', 'created_at'], 'integer'],
+            [['created_by', 'money', 'type'], 'required'],
+            [['created_by', 'type', 'created_at'], 'integer'],
             [['money'], 'number'],
             [['description'], 'string'],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
         ];
     }
 
@@ -47,11 +71,11 @@ class CashFlow extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'money' => 'Money',
-            'description' => 'Description',
-            'type' => 'Type',
-            'created_at' => 'Created At',
+            'created_by' => 'created_by',
+            'money' => '金額',
+            'description' => '明細',
+            'type' => '出/入款',
+            'created_at' => '時間',
         ];
     }
 
@@ -62,7 +86,7 @@ class CashFlow extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::className(), ['id' => 'created_by']);
     }
 
     /**

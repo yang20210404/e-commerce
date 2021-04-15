@@ -20,7 +20,7 @@ use yii\helpers\VarDumper;
  * @property OrderItems[] $orderItems
  * @property User $createdBy
  */
-class Order extends \yii\db\ActiveRecord
+class Order extends ActiveRecord
 {
     const STATUS_DRAFT = 0;
     const STATUS_PAID = 1;
