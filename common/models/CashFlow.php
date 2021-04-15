@@ -120,7 +120,7 @@ class CashFlow extends ActiveRecord
 
         $this->money = (int)$order->total_price;
         $this->type = self::TYPE_WITHDRAW;
-        $this->description = "<訂單退款><br>編號：$order->id";
+        $this->description = "<訂單退款><br>訂單編號：$order->id";
         $this->created_by = $order->created_by;
 
         $transaction = \Yii::$app->db->beginTransaction();
@@ -138,5 +138,40 @@ class CashFlow extends ActiveRecord
         }
 
         $transaction->rollBack();
+    }
+
+    public function pay($order_id)
+    {
+        $order = Order::findOne(['id' => $order_id]);
+
+        $this->money = (int)$order->total_price;
+        $this->type = self::TYPE_DEPOSIT;
+        $this->description = "<商城購物><br>訂單編號：$order->id";
+        $this->created_by = $order->created_by;
+
+        $transaction = \Yii::$app->db->beginTransaction();
+        $error = '';
+
+        if (parent::save($runValidation = true, $attributeNames = null)) {
+            $user = User::findOne($order->created_by);
+
+            if ($user->balance >= $order->total_price) {
+                $user->balance -= $order->total_price;
+
+                if ($user->save()) {
+                    $order->status = Order::STATUS_PAID;
+                    if ($order->save()) {
+                        $transaction->commit();
+                    }
+                }
+            } else {
+                $error = '餘額不足，請聯繫管理員充值';
+
+            }
+        }
+
+        $transaction->rollBack();
+
+        return $error;
     }
 }

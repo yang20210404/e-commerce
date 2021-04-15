@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\CashFlow;
 use common\models\OrderItem;
 use Yii;
 use common\models\Order;
@@ -89,9 +90,10 @@ class OrderController extends \frontend\base\Controller
     {
         $id = Yii::$app->request->post('id');
 
-        $order = Order::findOne(['id' => $id]);
-        $order->status = Order::STATUS_PAID;
-        $order->save();
+        $cashFlow = new CashFlow();
+        if ($cashFlow->pay($id)) {
+            return $cashFlow->pay($id);
+        }
     }
 
     /**

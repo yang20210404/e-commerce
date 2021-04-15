@@ -84,6 +84,6 @@ class OrderController extends Controller
         $id = Yii::$app->request->post('id');
 
         $cashFlow = new CashFlow();
-        return $cashFlow->refund($id);
+        $cashFlow->refund($id);
     }
 }

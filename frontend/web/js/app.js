@@ -16,7 +16,7 @@ $(function(){
             method: 'POST',
             url: $this.attr('href'),
             data: {id},
-            success: function(result){
+            success: function(result) {
                 if (result.success) {
                     $cartQuantity.text(parseInt($cartQuantity.text() || 0) + 1);
                     alert('商品已加入購物車！！');
@@ -39,7 +39,7 @@ $(function(){
             method: 'POST',
             url: url,
             data: {id, quantity},
-            success: function(result){
+            success: function(result) {
                 $cartQuantity.text(result.quantity);
                 $td.next().text(result.totalPriceFromItem);
                 $totalPrice.text('總計：' + result.totalPriceFromUser);
@@ -57,9 +57,13 @@ $(function(){
             method: 'POST',
             url: $this.attr('href'),
             data: {id},
-            success: function(){
-                alert('付款成功！！');
-                $this.parent().html('<span class="badge badge-success">已付款</span>');
+            success: function(result) {
+                if (result) {
+                    alert(result);
+                } else {
+                    alert('付款成功！！');
+                    $this.parent().html('<span class="badge badge-success">已付款</span>');
+                }
             }
         })
     })
@@ -85,8 +89,7 @@ $(function(){
             method: 'POST',
             url: $this.attr('href'),
             data: {old_password, password, password_repeat},
-            success: function(result){
-                console.log(result);
+            success: function(result) {
                 if (result['old_password']) {
                     $('#resetpasswordform-password').val('');
                     $('.invalid-feedback').eq(2).text('');
