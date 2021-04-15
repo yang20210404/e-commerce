@@ -45,8 +45,15 @@ $this->title = '購物車';
                             </td>
                         </tr>
                     <?php endforeach; ?>
-                    <tr class="text-right">
-                        <td colspan="6">
+                    <tr>
+                        <td colspan="3" class="text-left">
+                            <?= \yii\helpers\Html::a('清空購物車', ['/cart/delete'], [
+                                'class' => 'btn btn-danger btn',
+                                'data-method' => 'DELETE',
+                                'data-confirm' => '確定要清空嗎?'
+                            ]) ?>
+                        </td>
+                        <td colspan="3" class="text-right">
                             <h5 class="total-price">總計：<?= Yii::$app->formatter->asCurrency($totalPriceFromUser) ?></h5>
                         </td>
                     </tr>

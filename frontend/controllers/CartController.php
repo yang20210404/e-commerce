@@ -128,10 +128,17 @@ class CartController extends \frontend\base\Controller
         ];
     }
 
-    public function actionDelete($id){
+    public function actionDelete($id = null){
         $userId = \Yii::$app->user->id;
 
-        CartItem::deleteAll(['product_id' => $id, 'created_by' => $userId]);
+        if ($id) {
+            CartItem::deleteAll([
+                'product_id' => $id,
+                'created_by' => $userId
+            ]);
+        } else {
+            CartItem::deleteAll(['created_by' => $userId]);
+        }
 
         return $this->redirect(['index']);
     }
