@@ -2,9 +2,9 @@
 
 namespace backend\controllers;
 
+use common\models\CashFlow;
 use common\models\OrderItem;
 use Yii;
-use common\models\Order;
 use backend\models\search\OrderSearch;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -83,8 +83,7 @@ class OrderController extends Controller
     {
         $id = Yii::$app->request->post('id');
 
-        $order = Order::findOne(['id' => $id]);
-        $order->status = Order::STATUS_REFUND;
-        $order->save();
+        $cashFlow = new CashFlow();
+        return $cashFlow->refund($id);
     }
 }

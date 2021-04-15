@@ -93,8 +93,8 @@ class CashFlow extends ActiveRecord
 
     public function deposit()
     {
-        $this->type = self::TYPE_DEPOSIT;
-        $this->description = '管理員後台充值';
+        $this->type = self::TYPE_WITHDRAW;
+        $this->description = '<管理員後台充值>';
 
         $transaction = \Yii::$app->db->beginTransaction();
 
@@ -112,5 +112,31 @@ class CashFlow extends ActiveRecord
         $transaction->rollBack();
 
         return false;
+    }
+
+    public function refund($order_id)
+    {
+        $order = Order::findOne(['id' => $order_id]);
+
+        $this->money = (int)$order->total_price;
+        $this->type = self::TYPE_WITHDRAW;
+        $this->description = "<訂單退款><br>編號：$order->id";
+        $this->created_by = $order->created_by;
+
+        $transaction = \Yii::$app->db->beginTransaction();
+
+        if (parent::save($runValidation = true, $attributeNames = null)) {
+            $user = User::findOne($order->created_by);
+            $user->balance += $order->total_price;
+
+            if ($user->save()) {
+                $order->status = Order::STATUS_REFUND;
+                if ($order->save()) {
+                    $transaction->commit();
+                }
+            }
+        }
+
+        $transaction->rollBack();
     }
 }

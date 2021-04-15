@@ -15,7 +15,7 @@ $(function(){
             method: 'POST',
             url: $this.attr('href'),
             data: {id},
-            success: function(){
+            success: function() {
                 alert('退款成功！！');
                 $this.parent().html('<span class="badge badge-secondary">已退款</span>');
             }
@@ -32,7 +32,7 @@ $(function(){
             method: 'POST',
             url: $this.attr('href'),
             data: {id},
-            success: function(){
+            success: function() {
                 alert('用戶激活成功！！');
                 location.reload();
             }
@@ -49,7 +49,7 @@ $(function(){
             method: 'POST',
             url: $this.attr('href'),
             data: {id},
-            success: function(){
+            success: function() {
                 alert('用戶凍結成功！！');
                 location.reload();
             }
@@ -66,7 +66,7 @@ $(function(){
             method: 'POST',
             url: $this.attr('href'),
             data: {id},
-            success: function(){
+            success: function() {
                 alert('商品上架成功！！');
                 location.reload();
             }
@@ -83,7 +83,7 @@ $(function(){
             method: 'POST',
             url: $this.attr('href'),
             data: {id},
-            success: function(){
+            success: function() {
                 alert('商品下架成功！！');
                 location.reload();
             }

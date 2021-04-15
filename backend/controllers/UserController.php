@@ -91,8 +91,6 @@ class UserController extends Controller
             Yii::$app->session->setFlash('success', '充值成功！！');
 
             return $this->redirect(['index']);
-        } else {
-            Yii::$app->session->setFlash('success', '充值失敗！！ 請再試一次');
         }
 
         return $this->render('update', [
@@ -117,12 +115,6 @@ class UserController extends Controller
         $user = User::findOne(['id' => $id]);
         $user->status = User::STATUS_INACTIVE;
         $user->save();
-    }
-
-    public function actionDeposit()
-    {
-        return Yii::$app->request->post();
-
     }
 
     /**

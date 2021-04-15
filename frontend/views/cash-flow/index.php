@@ -43,6 +43,7 @@ $this->title = '資金流水';
             ],
             [
                 'attribute' => 'description',
+                'format' => 'html',
                 'contentOptions' => [
                     'style' => 'word-break: break-all;',
                 ]

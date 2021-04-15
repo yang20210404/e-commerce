@@ -5,7 +5,6 @@ namespace common\models;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\FileHelper;
-use yii\helpers\VarDumper;
 
 /**
  * This is the model class for table "products".
