@@ -4,7 +4,6 @@ namespace frontend\controllers;
 use common\models\CartItem;
 use common\models\Order;
 use common\models\Product;
-use yii\db\Query;
 use yii\filters\AccessControl;
 use yii\filters\ContentNegotiator;
 use yii\filters\VerbFilter;

@@ -39,7 +39,7 @@ $this->title = '個人資料';
                     <?= $form->field($model, 'password_repeat')->passwordInput() ?>
 
                     <div class="form-group">
-                        <?= Html::a('確認', \yii\helpers\Url::to(['/site/reset-password', 'model' => $model]), [
+                        <?= Html::a('確認', \yii\helpers\Url::to(['/site/reset-password']), [
                             'class' => 'btn btn-success btn-reset-password'
                         ]) ?>
                     </div>
