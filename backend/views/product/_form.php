@@ -47,7 +47,7 @@ use yii\bootstrap4\ActiveForm;
     <?= $form->field($model, 'status')->checkbox() ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->name ? '更新' : '新增', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton($model->name ? '儲存' : '新增', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

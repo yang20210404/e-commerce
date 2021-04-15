@@ -15,9 +15,7 @@ $this->title = '管理員列表';
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'pager' => [
-            'class' => \yii\bootstrap4\LinkPager::class
-        ],
+        'pager' => ['class' => \yii\bootstrap4\LinkPager::class],
         'columns' => [
             [
                 'attribute' => 'id',
@@ -64,8 +62,8 @@ $this->title = '管理員列表';
                 </div>
             <?php endforeach; ?>
 
-            <div class="form-group">
-                <?= Html::submitButton('添加', ['class' => 'btn btn-success']) ?>
+            <div class="form-group" style="margin-top: 15px;">
+                <?= Html::submitButton('添加', ['class' => 'btn btn-primary']) ?>
             </div>
         <?php \yii\bootstrap4\ActiveForm::end(); ?>
     <?php \yii\bootstrap4\Modal::end();  ?>

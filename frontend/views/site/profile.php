@@ -20,6 +20,7 @@ $this->title = '個人資料';
 
             <div class="form-group">
                 <?= Html::submitButton('儲存', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+
                 <?php
                 \yii\bootstrap4\Modal::begin([
                     'title' => '重設密碼',
@@ -28,7 +29,6 @@ $this->title = '個人資料';
                         'class' => 'btn btn-success btn-reset-password-modal'
                     ]
                 ]); ?>
-
                     <?php $form = \yii\bootstrap4\ActiveForm::begin(); ?>
                         <?= $form->field($model, 'old_password')->passwordInput() ?>
                         <?= $form->field($model, 'password')->passwordInput() ?>

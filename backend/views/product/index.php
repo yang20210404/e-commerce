@@ -23,9 +23,7 @@ $this->title = '商品列表';
             [
                 'attribute' => 'image',
                 'content' => fn($model) => Html::img($model->getImageUrl(), ['style' => 'width: 80px']),
-                'contentOptions' => [
-                    'style' => 'padding: 1px; width: 81px'
-                ]
+                'contentOptions' => ['style' => 'padding: 1px; width: 81px']
             ],
             [
                 'attribute' => 'name',
@@ -36,6 +34,7 @@ $this->title = '商品列表';
                 'format' => ['currency'],
                 'contentOptions' => [
                     'style' => 'width: 120px',
+                    'align' => 'center'
                 ]
             ],
             [
@@ -62,9 +61,7 @@ $this->title = '商品列表';
                             'class' => 'btn btn-success btn-sm'
                     ]);
                 },
-                'contentOptions' => [
-                    'align' => 'center'
-                ]
+                'contentOptions' => ['align' => 'center']
             ],
         ],
     ]); ?>

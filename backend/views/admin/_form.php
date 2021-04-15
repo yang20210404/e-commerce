@@ -15,7 +15,7 @@ use yii\bootstrap4\ActiveForm;
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('更新', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('儲存', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
