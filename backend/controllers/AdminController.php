@@ -83,6 +83,8 @@ class AdminController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', '管理員資量修改成功！！');
+
             return $this->redirect(['index']);
         }
 
@@ -96,6 +98,8 @@ class AdminController extends Controller
         $model = $this->findModel($id);
         $model->admin = User::NOT_ADMIN;
         $model->save();
+
+        Yii::$app->session->setFlash('success', '管理員移除成功！！');
 
         return $this->redirect(['index']);
     }

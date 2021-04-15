@@ -86,6 +86,8 @@ class ProductController extends Controller
         $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', '商品新增成功！！');
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -107,6 +109,8 @@ class ProductController extends Controller
         $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', '商品修改成功！！');
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -127,6 +131,8 @@ class ProductController extends Controller
         $model = $this->findModel($id);
         $model->is_delete = Product::IS_DELETE;
         $model->save();
+
+        Yii::$app->session->setFlash('success', '商品刪除成功！！');
 
         return $this->redirect(['index']);
     }

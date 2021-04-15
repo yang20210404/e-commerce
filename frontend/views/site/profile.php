@@ -18,33 +18,33 @@ $this->title = '個人資料';
 
             <?= $form->field($user, 'username')->textInput(['autofocus' => true]) ?>
 
-            <div class="form-group">
+            <div class="form-group" style="float: left; margin-right: 7px;">
                 <?= Html::submitButton('儲存', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
 
-                <?php
-                \yii\bootstrap4\Modal::begin([
-                    'title' => '重設密碼',
-                    'toggleButton' => [
-                        'label' => '重設密碼',
-                        'class' => 'btn btn-success btn-reset-password-modal'
-                    ]
-                ]); ?>
-                    <?php $form = \yii\bootstrap4\ActiveForm::begin(); ?>
-                        <?= $form->field($model, 'old_password')->passwordInput() ?>
-                        <?= $form->field($model, 'password')->passwordInput() ?>
-                        <?= $form->field($model, 'password_repeat')->passwordInput() ?>
 
-                        <div class="form-group">
-                            <?= Html::a('確認', \yii\helpers\Url::to(['/site/reset-password', 'model' => $model]), [
-                                    'class' => 'btn btn-success btn-reset-password'
-                            ]) ?>
-                        </div>
-                    <?php \yii\bootstrap4\ActiveForm::end(); ?>
-
-                <?php \yii\bootstrap4\Modal::end();  ?>
             </div>
 
             <?php ActiveForm::end(); ?>
+
+            <?php \yii\bootstrap4\Modal::begin([
+                'title' => '重設密碼',
+                'toggleButton' => [
+                    'label' => '重設密碼',
+                    'class' => 'btn btn-success btn-reset-password-modal'
+                ]
+            ]); ?>
+                <?php $form = \yii\bootstrap4\ActiveForm::begin(); ?>
+                    <?= $form->field($model, 'old_password')->passwordInput() ?>
+                    <?= $form->field($model, 'password')->passwordInput() ?>
+                    <?= $form->field($model, 'password_repeat')->passwordInput() ?>
+
+                    <div class="form-group">
+                        <?= Html::a('確認', \yii\helpers\Url::to(['/site/reset-password', 'model' => $model]), [
+                            'class' => 'btn btn-success btn-reset-password'
+                        ]) ?>
+                    </div>
+                <?php \yii\bootstrap4\ActiveForm::end(); ?>
+            <?php \yii\bootstrap4\Modal::end();  ?>
         </div>
 
     </div>
