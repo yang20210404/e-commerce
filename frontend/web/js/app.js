@@ -62,7 +62,7 @@ $(function(){
                     alert(result);
                 } else {
                     alert('付款成功！！');
-                    $this.parent().html('<span class="badge badge-success">已付款</span>');
+                    location.reload();
                 }
             }
         })

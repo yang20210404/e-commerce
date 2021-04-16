@@ -17,7 +17,7 @@ $(function(){
             data: {id},
             success: function() {
                 alert('退款成功！！');
-                $this.parent().html('<span class="badge badge-secondary">已退款</span>');
+                location.reload();
             }
         })
     })
