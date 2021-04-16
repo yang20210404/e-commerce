@@ -21,8 +21,10 @@ class Controller extends \yii\web\Controller
 {
     public function beforeAction($action)
     {
-        $this->view->params['cartItemCount'] = CartItem::getTotalQuantity(\Yii::$app->user->id);
-        $this->view->params['balance'] = User::getBalance(\Yii::$app->user->id);
+        if (!\Yii::$app->user->isGuest) {
+            $this->view->params['cartItemCount'] = CartItem::getTotalQuantity(\Yii::$app->user->id);
+            $this->view->params['balance'] = User::getBalance(\Yii::$app->user->id);
+        }
 
         return parent::beforeAction($action);
     }

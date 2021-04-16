@@ -10,8 +10,10 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
-$cartItemCount = $this->params['cartItemCount'];
-$balance = $this->params['balance'];
+if (!Yii::$app->user->isGuest) {
+    $cartItemCount = $this->params['cartItemCount'];
+    $balance = $this->params['balance'];
+}
 
 AppAsset::register($this);
 ?>
