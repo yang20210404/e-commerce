@@ -19,6 +19,9 @@ $this->title = '商品列表';
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'pager' => [
+            'class' => \yii\bootstrap4\LinkPager::class
+        ],
         'columns' => [
             [
                 'attribute' => 'image',
