@@ -26,16 +26,24 @@ $this->title = '購物車';
                     <?php foreach ($items as $item): ?>
                         <tr data-id="<?= $item['id'] ?>" data-url="<?= \yii\helpers\Url::to(['/cart/change-quantity']) ?>">
                             <td>
-                                <img src="<?= 'http://127.0.0.1/e-commerce/frontend/web/storage' . $item['image'] ?>"
-                                     style="width: 120px;"
-                                     alt="<?= $item['name'] ?>">
+                                <a href="<?= \yii\helpers\Url::to(['/site/detail', 'id' => $item['id']]); ?>">
+                                    <img src="<?= 'http://127.0.0.1/e-commerce/frontend/web/storage' . $item['image'] ?>" style="width: 120px;">
+                                </a>
                             </td>
-                            <td style="word-break: break-all;"><?= $item['name'] ?></td>
-                            <td><?= Yii::$app->formatter->asCurrency($item['price']) ?></td>
+                            <td style="word-break: break-all;">
+                                <a href="<?= \yii\helpers\Url::to(['/site/detail', 'id' => $item['id']]); ?>">
+                                    <?= $item['name'] ?>
+                                </a>
+                            </td>
+                            <td>
+                                <?= Yii::$app->formatter->asCurrency($item['price']) ?>
+                            </td>
                             <td>
                                 <input type="number" min="1" class="form-control item-quantity" style="width: 60px" value="<?= $item['quantity'] ?>">
                             </td>
-                            <td><?= Yii::$app->formatter->asCurrency($item['total_price']) ?></td>
+                            <td>
+                                <?= Yii::$app->formatter->asCurrency($item['total_price']) ?>
+                            </td>
                             <td>
                                 <?= \yii\helpers\Html::a('移除', ['/cart/delete', 'id' => $item['id']], [
                                     'class' => 'btn btn-outline-danger btn-sm',

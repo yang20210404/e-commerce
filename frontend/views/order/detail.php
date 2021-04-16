@@ -24,6 +24,10 @@ $this->title = '訂單編號';
             ],
             [
                 'attribute' => 'product_name',
+                'content' => fn($model) => Html::a(
+                    \yii\helpers\BaseStringHelper::truncate($model->product_name, 100),
+                    \yii\helpers\Url::to(['/site/detail', 'id' =>  $model->product_id])
+                ),
                 'contentOptions' => ['style' => 'word-break: break-all; width:590px;']
             ],
             [

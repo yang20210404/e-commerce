@@ -29,6 +29,7 @@ class SiteController extends \frontend\base\Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
+                'only' => ['signup', 'login', 'index', 'detail', 'logout', 'profile', 'reset-password'],
                 'rules' => [
                     [
                         'actions' => ['signup', 'login', 'index', 'detail'],
@@ -164,7 +165,7 @@ class SiteController extends \frontend\base\Controller
     public function actionDetail($id)
     {
         return $this->render('detail', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id)
         ]);
     }
 
@@ -222,6 +223,6 @@ class SiteController extends \frontend\base\Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('商品已下架');
     }
 }
