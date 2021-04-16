@@ -38,6 +38,11 @@ class User extends ActiveRecord implements IdentityInterface
         return '{{%user}}';
     }
 
+    public static function getBalance($id)
+    {
+        return  Yii::$app->formatter->asCurrency(User::findOne($id)->balance);
+    }
+
     /**
      * {@inheritdoc}
      */

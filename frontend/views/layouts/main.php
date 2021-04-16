@@ -11,6 +11,7 @@ use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
 $cartItemCount = $this->params['cartItemCount'];
+$balance = $this->params['balance'];
 
 AppAsset::register($this);
 ?>
@@ -42,6 +43,13 @@ AppAsset::register($this);
         ];
     } else {
         $menuItems = [
+            [
+                'label' => '餘額：' . $balance,
+                'url' => ['#'],
+                'linkOptions' => [
+                        'style' => 'color: blue; font-weight: bold;'
+                ]
+            ],
             [
                 'label' => '購物車 <span id="cart-quantity" class="badge badge-danger">' . $cartItemCount . '</span>',
                 'url' => ['/cart/index'],

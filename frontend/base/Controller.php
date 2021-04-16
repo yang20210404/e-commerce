@@ -9,6 +9,7 @@ namespace frontend\base;
 
 
 use common\models\CartItem;
+use common\models\User;
 
 /**
  * Class Controller
@@ -21,6 +22,7 @@ class Controller extends \yii\web\Controller
     public function beforeAction($action)
     {
         $this->view->params['cartItemCount'] = CartItem::getTotalQuantity(\Yii::$app->user->id);
+        $this->view->params['balance'] = User::getBalance(\Yii::$app->user->id);
 
         return parent::beforeAction($action);
     }
