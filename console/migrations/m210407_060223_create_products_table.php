@@ -16,7 +16,7 @@ class m210407_060223_create_products_table extends Migration
             'id' => $this->primaryKey(),
             'name' => $this->string(255)->notNull(),
             'description' => 'LONGTEXT',
-            'image' => $this->string(2000),
+            'image' => $this->string(2000)->defaultValue('/products/noimage.jpeg'),
             'price' => $this->decimal(10, 2)->notNull(),
             'status' => $this->tinyInteger(2)->notNull(),
             'created_at' => $this->integer(11),
