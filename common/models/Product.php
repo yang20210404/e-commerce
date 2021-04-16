@@ -96,7 +96,7 @@ class Product extends \yii\db\ActiveRecord
     /**
      * Gets query for [[CartItems]].
      *
-     * @return \yii\db\ActiveQuery|\common\models\query\CartItemsQuery
+     * @return \yii\db\ActiveQuery|\common\models\query\CartItemQuery
      */
     public function getCartItems()
     {
@@ -106,7 +106,7 @@ class Product extends \yii\db\ActiveRecord
     /**
      * Gets query for [[OrderItems]].
      *
-     * @return \yii\db\ActiveQuery|\common\models\query\OrderItemsQuery
+     * @return \yii\db\ActiveQuery|\common\models\query\OrderItemQuery
      */
     public function getOrderItems()
     {
@@ -150,14 +150,25 @@ class Product extends \yii\db\ActiveRecord
 
         $transaction = \Yii::$app->db->beginTransaction();
 
-        if (parent::save($runValidation, $attributeNames) && $this->imageFile) {
-            $fullPath = \Yii::getAlias('@frontend/web/storage' . $this->image);
-            $dir = dirname($fullPath);
+        if (parent::save($runValidation, $attributeNames)) {
+            $productInOrderItems = OrderItem::find()->where(['product_id' => $this->id])->all();
 
-            if (!FileHelper::createDirectory($dir) || !$this->imageFile->saveAs($fullPath)) {
-                $transaction->rollBack();
+            foreach ($productInOrderItems as $productInOrderItem) {
+                $productInOrderItem->product_name = $this->name;
+                $productInOrderItem->product_price = $this->price;
 
-                return false;
+                $productInOrderItem->save();
+            }
+
+            if ($this->imageFile) {
+                $fullPath = \Yii::getAlias('@frontend/web/storage' . $this->image);
+                $dir = dirname($fullPath);
+
+                if (!FileHelper::createDirectory($dir) || !$this->imageFile->saveAs($fullPath)) {
+                    $transaction->rollBack();
+
+                    return false;
+                }
             }
         }
 
