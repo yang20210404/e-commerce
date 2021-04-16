@@ -32,10 +32,8 @@ class CartItem extends \yii\db\ActiveRecord
     {
         return [
             [
-                'class' => BlameableBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_by'],
-                ],
+                'class' => BlameableBehavior::class,
+                'updatedByAttribute' => false
             ],
         ];
     }

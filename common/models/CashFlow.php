@@ -34,10 +34,8 @@ class CashFlow extends ActiveRecord
     {
         return [
             [
-                'class' => TimestampBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
-                ],
+                'class' => TimestampBehavior::class,
+                'updatedByAttribute' => false
             ],
         ];
     }

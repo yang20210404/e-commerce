@@ -38,16 +38,12 @@ class Order extends ActiveRecord
     {
         return [
             [
-                'class' => TimestampBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
-                ],
+                'class' => TimestampBehavior::class,
+                'updatedAtAttribute' => false
             ],
             [
                 'class' => BlameableBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_by'],
-                ],
+                'updatedByAttribute' => false
             ],
         ];
     }
