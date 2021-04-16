@@ -120,7 +120,7 @@ class CashFlow extends ActiveRecord
 
         $this->money = (int)$order->total_price;
         $this->type = self::TYPE_WITHDRAW;
-        $this->description = "<訂單退款><br>訂單編號：$order->id";
+        $this->description = "<訂單退款> 訂單編號：$order->id";
         $this->created_by = $order->created_by;
 
         $transaction = \Yii::$app->db->beginTransaction();
@@ -146,7 +146,7 @@ class CashFlow extends ActiveRecord
 
         $this->money = (int)$order->total_price;
         $this->type = self::TYPE_DEPOSIT;
-        $this->description = "<商城購物><br>訂單編號：$order->id";
+        $this->description = "<商城購物> 訂單編號：$order->id";
         $this->created_by = $order->created_by;
 
         $transaction = \Yii::$app->db->beginTransaction();

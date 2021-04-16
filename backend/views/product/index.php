@@ -24,12 +24,20 @@ $this->title = '商品列表';
         ],
         'columns' => [
             [
+                'attribute' => 'id',
+                'contentOptions' => [
+                    'style' => 'width: 10px; font-weight: bold; vertical-align: middle;',
+                    'align' => 'center'
+                ]
+            ],
+            [
                 'attribute' => 'image',
-                'content' => fn($model) => Html::img($model->getImageUrl(), ['style' => 'width: 80px']),
+                'content' => fn($model) => Html::img($model->getImageUrl(), ['style' => 'width: 100px']),
                 'contentOptions' => ['style' => 'padding: 1px; width: 81px']
             ],
             [
                 'attribute' => 'name',
+                'content' => fn($model) => \yii\helpers\BaseStringHelper::truncate($model->name, 70),
                 'contentOptions' => ['style' => 'word-break: break-all']
             ],
             [

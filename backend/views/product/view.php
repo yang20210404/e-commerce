@@ -25,7 +25,7 @@ $this->title = $model->name;
     </p>
 
     <div>
-        <img src="<?= $model->getImageUrl() ?>" style="width: 600px; margin: 40px 0;">
+        <img src="<?= $model->getImageUrl() ?>" style="width: 35%; margin: 40px 0;">
     </div>
 
     <?= DetailView::widget([

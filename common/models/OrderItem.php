@@ -48,6 +48,7 @@ class OrderItem extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'image' => '圖片',
+            'product_id' => '商品 ID',
             'product_name' => '品名',
             'product_price' => '單價',
             'quantity' => '數量',
@@ -57,7 +58,7 @@ class OrderItem extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Order]].
      *
-     * @return \yii\db\ActiveQuery|\common\models\query\OrdersQuery
+     * @return \yii\db\ActiveQuery|\common\models\query\OrderQuery
      */
     public function getOrder()
     {
@@ -67,7 +68,7 @@ class OrderItem extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Product]].
      *
-     * @return \yii\db\ActiveQuery|\common\models\query\ProductsQuery
+     * @return \yii\db\ActiveQuery|\common\models\query\ProductQuery
      */
     public function getProduct()
     {

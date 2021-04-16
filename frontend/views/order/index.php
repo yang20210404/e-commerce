@@ -22,7 +22,7 @@ $this->title = '訂單';
             [
                 'attribute' => 'id',
                 'contentOptions' => [
-                    'style' => 'width: 90px; vertical-align: middle',
+                    'style' => 'width: 10px; vertical-align: middle; font-weight: bold;',
                     'align' => 'center'
                 ]
             ],
@@ -43,15 +43,6 @@ $this->title = '訂單';
                 ]
             ],
             [
-                'content' => fn($model) =>Html::a('查看詳細', \yii\helpers\Url::to(['/order/detail', 'id' => $model->id]), [
-                        'class' => 'btn btn-secondary btn-sm'
-                    ]),
-                'contentOptions' => [
-                    'style' => 'width: 90px',
-                    'align' => 'center'
-                ]
-            ],
-            [
                 'attribute' => 'status',
                 'format' => 'orderStatusForFrontend',
                 'contentOptions' => [
@@ -59,6 +50,15 @@ $this->title = '訂單';
                     'align' => 'center'
                 ]
             ],
+            [
+                'content' => fn($model) =>Html::a('查看詳細', \yii\helpers\Url::to(['/order/detail', 'id' => $model->id]), [
+                        'class' => 'btn btn-secondary btn-sm'
+                    ]),
+                'contentOptions' => [
+                    'style' => 'width: 90px',
+                    'align' => 'center'
+                ]
+            ]
         ],
     ]); ?>
 

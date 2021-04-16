@@ -23,7 +23,7 @@ $this->title = '訂單列表';
             [
                 'attribute' => 'id',
                 'contentOptions' => [
-                    'style' => 'width: 90px; vertical-align: middle',
+                    'style' => 'width: 10px; vertical-align: middle; font-weight: bold;',
                     'align' => 'center'
                 ]
             ],
@@ -51,15 +51,6 @@ $this->title = '訂單列表';
                 ]
             ],
             [
-                'content' => fn($model) => Html::a('查看詳細', \yii\helpers\Url::to(['/order/detail', 'id' => $model->id]), [
-                    'class' => 'btn btn-secondary btn-sm'
-                ]),
-                'contentOptions' => [
-                    'style' => 'width: 90px',
-                    'align' => 'center'
-                ]
-            ],
-            [
                 'attribute' => 'status',
                 'filter' => Html::activeDropDownList($searchModel, 'status', \common\models\Order::getStatusLabels(), [
                     'prompt' => '全部',
@@ -71,6 +62,15 @@ $this->title = '訂單列表';
                     'align' => 'center'
                 ],
             ],
+            [
+                'content' => fn($model) => Html::a('查看詳細', \yii\helpers\Url::to(['/order/detail', 'id' => $model->id]), [
+                    'class' => 'btn btn-secondary btn-sm'
+                ]),
+                'contentOptions' => [
+                    'style' => 'width: 90px',
+                    'align' => 'center'
+                ]
+            ]
         ],
     ]); ?>
 

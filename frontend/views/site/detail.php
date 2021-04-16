@@ -13,7 +13,7 @@ $this->title = $model->name;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <div>
-        <img src="<?= $model->getImageUrl() ?>" style="width: 600px; margin: 40px 0;">
+        <img src="<?= $model->getImageUrl() ?>" style="width: 40%; margin: 40px 0;">
     </div>
 
     <?= DetailView::widget([

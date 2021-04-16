@@ -23,7 +23,7 @@ $this->title = '用戶列表';
             [
                 'attribute' => 'id',
                 'contentOptions' => [
-                    'style' => 'width: 90px; vertical-align: middle',
+                    'style' => 'width: 10px; vertical-align: middle; font-weight: bold;',
                     'align' => 'center'
                 ]
             ],
