@@ -6,5 +6,6 @@
     $ composer install
 
 #
-### 請在 /common/config/main-local.php 配置資料庫
-
+### 請在 /common/config/main-local.php 配置資料庫，並執行下列
+    $ php yii migrate
+#
