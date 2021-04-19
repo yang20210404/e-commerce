@@ -18,14 +18,13 @@ $this->title = '商品類別';
         'title' => '建立類別',
         'toggleButton' => [
             'label' => '建立類別',
-            'class' => 'btn btn-success'
+            'class' => 'btn btn-success',
+            'style' => 'margin-bottom: 16px;'
         ]
     ]); ?>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
+        <?= $this->render('_form', [
+            'model' => $model,
+        ]) ?>
     <?php \yii\bootstrap4\Modal::end();  ?>
 
     <?= GridView::widget([

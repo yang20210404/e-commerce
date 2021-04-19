@@ -5,6 +5,8 @@
 $this->title = '購物商城';
 ?>
 <div class="site-index">
+    <h1>商品列表</h1>
+
     <?= \yii\widgets\ListView::widget([
         'dataProvider' => $dataProvider,
         'layout' => '{summary}<div class="row">{items}</div><div>{pager}</div>',
