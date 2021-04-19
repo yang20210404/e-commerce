@@ -10,6 +10,7 @@ use yii\helpers\FileHelper;
  * This is the model class for table "products".
  *
  * @property int $id
+ * @property int $category_id
  * @property string $name
  * @property string|null $description
  * @property string|null $image
@@ -61,13 +62,15 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'price', 'status'], 'required'],
+            [['name', 'price', 'status', 'category_id'], 'required'],
+            [['category_id'], 'match', 'pattern' => '/^(?!0).*$/', 'message' => '請選擇商品類別'],
             [['description'], 'string'],
             [['price'], 'number'],
             [['imageFile'], 'image', 'extensions' => 'png, jpg, jpeg'],
             [['status', 'created_at', 'updated_at', 'created_by', 'updated_by', 'is_delete'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['image'], 'string', 'max' => 2000],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updated_by' => 'id']],
         ];
@@ -81,6 +84,7 @@ class Product extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => '品名',
+            'category_id' => '商品類別',
             'description' => '描述',
             'image' => '圖片',
             'imageFile' => '',

@@ -40,6 +40,7 @@ AppAsset::register($this);
     } else {
         $menuItems = [
             ['label' => '商品管理', 'url' => ['/product/index']],
+            ['label' => '商品類別管理', 'url' => ['/category/index']],
             ['label' => '用戶管理', 'url' => ['/user/index']],
             ['label' => '訂單管理', 'url' => ['/order/index']],
             ['label' => '管理員', 'url' => ['/admin/index']],

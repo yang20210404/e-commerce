@@ -2,10 +2,12 @@
 
 namespace backend\controllers;
 
+use common\models\Category;
 use Yii;
 use common\models\Product;
 use backend\models\search\ProductSearch;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -82,6 +84,7 @@ class ProductController extends Controller
      */
     public function actionCreate()
     {
+//        return var_dump(Yii::$app->request->post());
         $model = new Product();
         $model->status = 1;
         $model->imageFile = UploadedFile::getInstance($model, 'imageFile');

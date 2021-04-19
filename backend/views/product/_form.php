@@ -21,6 +21,8 @@ use yii\bootstrap4\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'category_id')->dropdownList(\common\models\Category::getAllCategory()) ?>
+
     <?= $form->field($model, 'description')->widget(CKEditor::class, [
         'options' => ['row' => 6],
         'preset' => 'basic'
