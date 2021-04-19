@@ -177,7 +177,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getCartItems()
     {
-        return $this->hasMany(CartItems::className(), ['created_by' => 'id']);
+        return $this->hasMany(CartItem::className(), ['created_by' => 'id']);
     }
 
     /**
@@ -197,7 +197,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getOrders()
     {
-        return $this->hasMany(Orders::className(), ['created_by' => 'id']);
+        return $this->hasMany(Order::className(), ['created_by' => 'id']);
     }
 
     public static function getStatusLabels()
@@ -206,5 +206,14 @@ class User extends ActiveRecord implements IdentityInterface
             self::STATUS_ACTIVE => '正常',
             self::STATUS_INACTIVE => '凍結',
         ];
+    }
+
+    public function save($runValidation = true, $attributeNames = null)
+    {
+        if (parent::save($runValidation, $attributeNames)) {
+            Order::updateAll(['username' => $this->username], ['created_by' => $this->id]);
+        }
+
+        return true;
     }
 }
