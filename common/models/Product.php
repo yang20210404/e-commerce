@@ -21,8 +21,8 @@ use yii\helpers\FileHelper;
  * @property int|null $created_by
  * @property int|null $updated_by
  *
- * @property CartItems[] $cartItems
- * @property OrderItems[] $orderItems
+ * @property CartItem[] $cartItems
+ * @property OrderItem[] $orderItems
  * @property User $createdBy
  * @property User $updatedBy
  */
@@ -100,7 +100,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getCartItems()
     {
-        return $this->hasMany(CartItems::className(), ['product_id' => 'id']);
+        return $this->hasMany(CartItem::className(), ['product_id' => 'id']);
     }
 
     /**
@@ -110,7 +110,17 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getOrderItems()
     {
-        return $this->hasMany(OrderItems::className(), ['product_id' => 'id']);
+        return $this->hasMany(OrderItem::className(), ['product_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Category]].
+     *
+     * @return \yii\db\ActiveQuery|\common\models\query\CategoryQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
     /**

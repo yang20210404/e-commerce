@@ -12,8 +12,8 @@ namespace common\models;
  * @property int $order_id
  * @property int $quantity
  *
- * @property Orders $order
- * @property Products $product
+ * @property Order $order
+ * @property Product $product
  */
 class OrderItem extends \yii\db\ActiveRecord
 {

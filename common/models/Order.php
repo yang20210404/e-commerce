@@ -17,7 +17,7 @@ use yii\helpers\VarDumper;
  * @property int|null $created_at
  * @property int|null $created_by
  *
- * @property OrderItems[] $orderItems
+ * @property OrderItem[] $orderItems
  * @property User $createdBy
  */
 class Order extends ActiveRecord
@@ -80,7 +80,7 @@ class Order extends ActiveRecord
     /**
      * Gets query for [[OrderItems]].
      *
-     * @return \yii\db\ActiveQuery|\common\models\query\OrderItemsQuery
+     * @return \yii\db\ActiveQuery|\common\models\query\OrderItemQuery
      */
     public function getOrderItems()
     {
