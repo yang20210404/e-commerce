@@ -34,13 +34,6 @@ class UserController extends Controller
                     ],
                 ],
             ],
-            [
-                'class' => ContentNegotiator::class,
-                'only' => ['deposit'],
-                'formats' => [
-                    'application/json' => Response::FORMAT_JSON,
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

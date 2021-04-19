@@ -35,7 +35,7 @@ class CashFlow extends ActiveRecord
         return [
             [
                 'class' => TimestampBehavior::class,
-                'updatedByAttribute' => false
+                'updatedAtAttribute' => false
             ],
         ];
     }

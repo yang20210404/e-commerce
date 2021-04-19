@@ -151,14 +151,13 @@ class Product extends \yii\db\ActiveRecord
         $transaction = \Yii::$app->db->beginTransaction();
 
         if (parent::save($runValidation, $attributeNames)) {
-            $productInOrderItems = OrderItem::find()->where(['product_id' => $this->id])->all();
-
-            foreach ($productInOrderItems as $productInOrderItem) {
-                $productInOrderItem->product_name = $this->name;
-                $productInOrderItem->product_price = $this->price;
-
-                $productInOrderItem->save();
-            }
+            OrderItem::updateAll(
+                [
+                    'product_name' => $this->name,
+                    'product_price' => $this->price
+                ],
+                ['product_id' => $this->id]
+            );
 
             if ($this->imageFile) {
                 $fullPath = \Yii::getAlias('@frontend/web/storage' . $this->image);

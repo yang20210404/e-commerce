@@ -83,6 +83,7 @@ class ProductController extends Controller
     public function actionCreate()
     {
         $model = new Product();
+        $model->status = 1;
         $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
