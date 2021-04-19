@@ -23,6 +23,7 @@ class SignupForm extends Model
         return [
             ['username', 'trim'],
             ['username', 'required', 'message' => '用戶名不能為空'],
+            ['username', 'match', 'pattern' => '/^[@_a-zA-Z0-9]+$/', 'message' => '只能輸入英文字母,數字,@,_'],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => '該用戶名已被使用'],
             ['username', 'string', 'min' => 1, 'max' => 255],
 
