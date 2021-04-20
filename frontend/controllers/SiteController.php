@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Category;
 use common\models\Product;
 use common\models\User;
 use Yii;
@@ -85,20 +86,36 @@ class SiteController extends \frontend\base\Controller
      *
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($category_id = null)
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Product::find()->andWhere([
-                'status' => Product::STATUS_ACTIVE,
-                'is_delete' => Product::NOT_DELETE
-            ]),
-            'pagination' => [
-                'pageSize' => 6,
-            ],
-        ]);
+        if ($category_id) {
+            $dataProvider = new ActiveDataProvider([
+                'query' => Product::find()->andWhere([
+                    'status' => Product::STATUS_ACTIVE,
+                    'is_delete' => Product::NOT_DELETE,
+                    'category_id' => $category_id
+                ]),
+                'pagination' => [
+                    'pageSize' => 6,
+                ],
+            ]);
+        } else {
+            $dataProvider = new ActiveDataProvider([
+                'query' => Product::find()->andWhere([
+                    'status' => Product::STATUS_ACTIVE,
+                    'is_delete' => Product::NOT_DELETE
+                ]),
+                'pagination' => [
+                    'pageSize' => 6,
+                ],
+            ]);
+        }
+
+        $categories = Category::find()->all();
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'categories' => $categories
         ]);
     }
 
