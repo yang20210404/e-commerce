@@ -46,7 +46,7 @@ $this->title = '訂單列表';
                 'attribute' => 'created_at',
                 'format' => 'datetime',
                 'contentOptions' => [
-                    'style' => 'width: 30px',
+                    'style' => 'width: 30px; white-space: nowrap;',
                     'align' => 'center'
                 ]
             ],

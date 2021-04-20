@@ -46,14 +46,14 @@ $this->title = '用戶列表';
                 'attribute' => 'created_at',
                 'format' => 'datetime',
                 'contentOptions' => [
-                    'style' => 'width: 90px; vertical-align: middle',
+                    'style' => 'width: 10px; vertical-align: middle; white-space: nowrap;',
                     'align' => 'center'
                 ]
             ],            [
                 'attribute' => 'last_login_at',
                 'format' => 'datetime',
                 'contentOptions' => [
-                    'style' => 'width: 90px; vertical-align: middle',
+                    'style' => 'width: 10px; vertical-align: middle; white-space: nowrap;',
                     'align' => 'center'
                 ]
             ],
