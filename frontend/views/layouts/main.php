@@ -35,7 +35,10 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl
+        'brandUrl' => Yii::$app->homeUrl,
+        'options' => [
+                'class' => 'navbar-expand-lg navbar-light bg-light fixed-top'
+        ]
     ]);
 
     if (Yii::$app->user->isGuest) {
