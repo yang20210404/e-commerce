@@ -9,7 +9,7 @@
 ### 請在 /common/config/main-local.php 配置連接資料庫，並執行
     $ php yii migrate
 #
-### 把資料夾底下的 init.sql 匯入資料庫
+### 把資料夾底下的 init2.sql 匯入資料庫
 
 #
 > 輸入 帳號：admin, 密碼：123456，即可登入後台
