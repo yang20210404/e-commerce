@@ -6,7 +6,7 @@
     </div>
     <div class="card-body">
         <h5 class="card-title" style="height: 50px;">
-            <a href="<?= \yii\helpers\Url::to(['site/detail', 'id' => $model->id]) ?>" class=""><?= \yii\helpers\BaseStringHelper::truncate($model->name, 40) ?></a>
+            <a href="<?= \yii\helpers\Url::to(['site/detail', 'id' => $model->id]) ?>" class=""><?= \yii\helpers\BaseStringHelper::truncate($model->name, 30) ?></a>
         </h5>
         <h5><?php echo Yii::$app->formatter->asCurrency($model->price) ?></h5>
     </div>

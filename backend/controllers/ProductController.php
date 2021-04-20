@@ -84,7 +84,6 @@ class ProductController extends Controller
      */
     public function actionCreate()
     {
-//        return var_dump(Yii::$app->request->post());
         $model = new Product();
         $model->status = 1;
         $model->imageFile = UploadedFile::getInstance($model, 'imageFile');

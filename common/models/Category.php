@@ -26,7 +26,7 @@ class Category extends \yii\db\ActiveRecord
         return 'categories';
     }
 
-    public static function getAllCategory()
+    public static function getAllCategoryBySelect()
     {
         $categories = Category::find()->select(['id', 'name'])->andWhere(['is_delete' => Category::NOT_DELETE])->asArray()->all();
 
@@ -38,6 +38,13 @@ class Category extends \yii\db\ActiveRecord
         array_unshift($newCategories, '請選擇');
 
         return $newCategories;
+    }
+
+    public static function getAllCategory()
+    {
+        $categories = Category::find()->select(['id', 'name'])->andWhere(['is_delete' => Category::NOT_DELETE])->asArray()->all();
+
+        return ArrayHelper::map($categories, 'id', 'name');
     }
 
     /**

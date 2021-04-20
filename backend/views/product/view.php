@@ -33,6 +33,11 @@ $this->title = $model->name;
         'attributes' => [
             'id',
             [
+                'attribute' => 'category_id',
+                'value' => \common\models\Category::getAllCategory()[$model->category_id],
+                'contentOptions' => ['style' => 'word-break: break-all']
+            ],
+            [
                 'attribute' => 'description',
                 'format' => ['html'],
                 'value' => $model->description,
