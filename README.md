@@ -6,9 +6,7 @@
     $ composer install
 
 #
-### 請在 /common/config/main-local.php 配置連接資料庫，並執行
-    $ php yii migrate
-#
+### 請在 /common/config/main-local.php 配置連接資料庫
 ### 把資料夾底下的 init2.sql 匯入資料庫
 
 #
