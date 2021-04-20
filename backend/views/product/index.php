@@ -50,9 +50,13 @@ $this->title = '商品列表';
             ],
             [
                 'attribute' => 'status',
+                'filter' => Html::activeDropDownList($searchModel, 'status', \common\models\Product::getStatusLabels(), [
+                    'prompt' => '全部',
+                    'class' => 'form-control'
+                ]),
                 'format' => 'productStatus',
                 'contentOptions' => [
-                    'style' => 'width: 10px',
+                    'style' => 'width: 110px',
                     'align' => 'center'
                 ]
             ],

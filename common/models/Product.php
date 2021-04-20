@@ -194,4 +194,12 @@ class Product extends \yii\db\ActiveRecord
     {
         return 'http://127.0.0.1/e-commerce/frontend/web/storage' . $this->image;
     }
+
+    public static function getStatusLabels()
+    {
+        return [
+            self::STATUS_ACTIVE => '上架',
+            self::STATUS_DRAFT => '下架',
+        ];
+    }
 }
