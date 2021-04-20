@@ -28,6 +28,9 @@ $this->title = '個人資料';
 
             <?php \yii\bootstrap4\Modal::begin([
                 'title' => '重設密碼',
+                'options' => [
+                    "data-backdrop" => "static"
+                ],
                 'toggleButton' => [
                     'label' => '重設密碼',
                     'class' => 'btn btn-success btn-reset-password-modal'

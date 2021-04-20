@@ -69,6 +69,7 @@ $(function(){
     })
 
     $resetPasswordModal.click(ev => {
+        $('#w0-label').html('重設密碼');
         $('.form-control').eq(1).removeClass('is-invalid');
         $('.form-control').eq(2).removeClass('is-invalid');
         $('.form-control').eq(3).removeClass('is-invalid');
@@ -80,6 +81,8 @@ $(function(){
     $resetPassword.click(ev => {
         ev.preventDefault();
 
+        $('#w0-label').html('重設密碼<span style="color: red;">（驗證中請稍候...）</span>');
+
         const $this = $(ev.target);
         const old_password = $('#resetpasswordform-old_password').val();
         const password = $('#resetpasswordform-password').val();
@@ -90,6 +93,7 @@ $(function(){
             url: $this.attr('href'),
             data: {old_password, password, password_repeat},
             success: function(result) {
+                $('#w0-label').html('重設密碼');
                 if (result['old_password']) {
                     $('#resetpasswordform-password').val('');
                     $('.invalid-feedback').eq(2).text('');
