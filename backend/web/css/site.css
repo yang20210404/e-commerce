@@ -1,6 +1,7 @@
 html,
 body {
     height: 100%;
+    font-size: 16px;
 }
 
 body.blank {
@@ -140,4 +141,24 @@ a.desc:after {
 
 table.detail-view th {
     width: 20%;
+}
+
+.fixed-top {
+    height: 56px;
+}
+
+#w2 .navbar-brand {
+    padding-top: 10px;
+}
+
+#w2 .container {
+    padding-right: 0px;
+}
+
+#w1 .navbar-brand {
+    padding-top: 10px;
+}
+
+#w1 .container {
+    padding-right: 0px;
 }
