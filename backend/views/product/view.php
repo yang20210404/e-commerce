@@ -47,9 +47,11 @@ $this->title = $model->name;
             [
                 'attribute' => 'status',
                 'format' => 'html',
-                'value' => fn() => Html::tag('span', $model->status ? '上架中' : '下架', [
-                    'class' => $model->status ? 'badge badge-success' : 'badge badge-danger'
-                ]),
+                'value' => function($model) {
+                    return Html::tag('span', $model->status ? '上架中' : '下架', [
+                            'class' => $model->status ? 'badge badge-success' : 'badge badge-danger'
+                    ]);
+                }
             ],
             'created_at:datetime',
             'updated_at:datetime',

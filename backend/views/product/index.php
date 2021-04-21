@@ -32,12 +32,16 @@ $this->title = '商品列表';
             ],
             [
                 'attribute' => 'image',
-                'content' => fn($model) => Html::img($model->getImageUrl(), ['style' => 'width: 100px']),
+                'content' => function($model) {
+                    return Html::img($model->getImageUrl(), ['style' => 'width: 100px']);
+                },
                 'contentOptions' => ['style' => 'padding: 1px; width: 81px']
             ],
             [
                 'attribute' => 'name',
-                'content' => fn($model) => \yii\helpers\BaseStringHelper::truncate($model->name, 70),
+                'content' => function($model) {
+                    return \yii\helpers\BaseStringHelper::truncate($model->name, 70);
+                },
                 'contentOptions' => ['style' => 'word-break: break-all']
             ],
             [

@@ -70,9 +70,11 @@ $this->title = '用戶列表';
                 ]
             ],
             [
-                'content' => fn($model) => Html::a('編輯/充值', \yii\helpers\Url::to(['/user/update', 'id' => $model->id]), [
-                    'class' => 'btn btn-primary btn-sm',
-                ]),
+                'content' => function($model) {
+                    return Html::a('編輯/充值', \yii\helpers\Url::to(['/user/update', 'id' => $model->id]), [
+                        'class' => 'btn btn-primary btn-sm',
+                    ]);
+                },
                 'contentOptions' => [
                     'style' => 'width: 90px; vertical-align: middle',
                     'align' => 'center'

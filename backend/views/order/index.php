@@ -63,9 +63,11 @@ $this->title = '訂單列表';
                 ],
             ],
             [
-                'content' => fn($model) => Html::a('查看詳細', \yii\helpers\Url::to(['/order/detail', 'id' => $model->id]), [
-                    'class' => 'btn btn-secondary btn-sm'
-                ]),
+                'content' => function($model) {
+                    return Html::a('查看詳細', \yii\helpers\Url::to(['/order/detail', 'id' => $model->id]), [
+                        'class' => 'btn btn-secondary btn-sm'
+                    ]);
+                },
                 'contentOptions' => [
                     'style' => 'width: 90px',
                     'align' => 'center'

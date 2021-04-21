@@ -49,9 +49,11 @@ $this->title = '商品類別';
                 ]
             ],
             [
-                'content' => fn($model) => Html::a('編輯', \yii\helpers\Url::to(['/category/update', 'id' => $model->id]), [
-                    'class' => 'btn btn-primary btn-sm btn-update-category',
-                ]),
+                'content' => function($model) {
+                    return Html::a('編輯', \yii\helpers\Url::to(['/category/update', 'id' => $model->id]), [
+                            'class' => 'btn btn-primary btn-sm btn-update-category',
+                        ]);
+                },
                 'contentOptions' => [
                     'style' => 'width: 5%; vertical-align: middle',
                     'align' => 'center'

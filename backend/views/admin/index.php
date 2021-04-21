@@ -60,9 +60,11 @@ $this->title = '管理員列表';
                 ]
             ],
             [
-                'content' => fn($model) => Html::a('編輯/移除', \yii\helpers\Url::to(['/admin/update', 'id' => $model->id]), [
-                    'class' => 'btn btn-primary btn-sm',
-                ]),
+                'content' => function($model) {
+                    return Html::a('編輯/移除', \yii\helpers\Url::to(['/admin/update', 'id' => $model->id]), [
+                            'class' => 'btn btn-primary btn-sm',
+                        ]);
+                },
                 'contentOptions' => [
                     'style' => 'width: 90px; vertical-align: middle',
                     'align' => 'center'

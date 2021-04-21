@@ -25,15 +25,19 @@ $this->title = '訂單編號'
             ],
             [
                 'attribute' => 'image',
-                'content' => fn($model) => Html::img($model->product->getImageUrl(), ['width' => '100px']),
+                'content' => function($model) {
+                    return Html::img($model->product->getImageUrl(), ['width' => '100px']);
+                },
                 'contentOptions' => ['style' => 'width:100px; padding: 1px;']
             ],
             [
                 'attribute' => 'product_name',
-                'content' => fn($model) => Html::a(
-                    \yii\helpers\BaseStringHelper::truncate($model->product_name, 100),
-                    \yii\helpers\Url::to(['/product/view', 'id' => $model->product_id])
-                ),
+                'content' => function($model) {
+                    return Html::a(
+                            \yii\helpers\BaseStringHelper::truncate($model->product_name, 100),
+                            \yii\helpers\Url::to(['/product/view', 'id' => $model->product_id])
+                    );
+                },
                 'contentOptions' => ['style' => 'word-break: break-all; width:590px;']
             ],
             [
