@@ -11,5 +11,5 @@
 
 #
 > 輸入 帳號：admin, 密碼：123456，即可登入後台
->- 前台: 網域/frontend/web
->- 後台: 網域/backend/web
+>- 前台: 伺服器根目錄/e-commerce/frontend/web
+>- 後台: 伺服器根目錄/e-commerce/backend/web
