@@ -51,7 +51,10 @@ class Product extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::class,
+            [
+                'class' => TimestampBehavior::class,
+                'value' => date('Y-m-d H:i:s', time())
+            ],
             BlameableBehavior::class
         ];
     }

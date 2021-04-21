@@ -49,7 +49,10 @@ class User extends ActiveRecord implements IdentityInterface
     public function behaviors()
     {
         return [
-            TimestampBehavior::class,
+            [
+                'class' => TimestampBehavior::class,
+                'value' => date('Y-m-d H:i:s', time())
+            ],
         ];
     }
 
