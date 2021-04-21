@@ -19,9 +19,9 @@ class m130524_201442_init extends Migration
             'password' => $this->string()->notNull(),
             'balance' => $this->decimal(10,2)->notNull()->defaultValue(0),
             'status' => $this->smallInteger()->notNull()->defaultValue(10),
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
-            'last_login_at' => $this->integer(),
+            'created_at' => $this->dateTime()->notNull(),
+            'updated_at' => $this->dateTime()->notNull(),
+            'last_login_at' => $this->dateTime(),
             'admin' => $this->boolean()->defaultValue(0),
         ], $tableOptions);
     }

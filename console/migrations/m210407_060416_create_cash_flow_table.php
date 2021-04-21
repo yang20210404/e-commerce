@@ -18,7 +18,7 @@ class m210407_060416_create_cash_flow_table extends Migration
             'money' => $this->decimal(10,2)->notNull(),
             'description' => 'LONGTEXT',
             'type' => $this->tinyInteger(1)->notNull(),
-            'created_at' => $this->integer(11)
+            'created_at' => $this->dateTime()
         ]);
 
         $this->createIndex(

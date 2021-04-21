@@ -19,8 +19,8 @@ class m210407_060223_create_products_table extends Migration
             'image' => $this->string(2000)->defaultValue('/products/noimage.jpeg'),
             'price' => $this->decimal(10, 2)->notNull(),
             'status' => $this->tinyInteger(2)->notNull(),
-            'created_at' => $this->integer(11),
-            'updated_at' => $this->integer(11),
+            'created_at' => $this->dateTime(),
+            'updated_at' => $this->dateTime(),
             'created_by' => $this->integer(11),
             'updated_by' => $this->integer(11),
         ]);

@@ -18,7 +18,7 @@ class UserSearch extends User
     {
         return [
             [['id', 'status', 'updated_at', 'admin'], 'integer'],
-            [['username', 'auth_key', 'password'], 'safe'],
+            [['username', 'auth_key', 'password', 'created_at'], 'safe'],
             [['balance'], 'number'],
         ];
     }
@@ -73,16 +73,28 @@ class UserSearch extends User
             'id' => $this->id,
             'balance' => $this->balance,
             'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
             'last_login_at' => $this->last_login_at,
+            'updated_at' => $this->updated_at,
             'admin' => $this->admin,
         ]);
+
+        $query->andFilterWhere(['between', 'created_at', $this->explodeDateTime($this->created_at)[0], $this->explodeDateTime($this->created_at)[1]]);
 
         $query->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'auth_key', $this->auth_key])
             ->andFilterWhere(['like', 'password', $this->password]);
 
         return $dataProvider;
+    }
+
+    public function explodeDateTime($dateTime) {
+        if ($dateTime) {
+            return explode(' - ', $dateTime);
+        } else {
+            return [
+                '2021-04-10',
+                date('Y-m-d', strtotime('+1 day'))
+            ];
+        }
     }
 }

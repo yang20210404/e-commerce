@@ -44,6 +44,16 @@ $this->title = '訂單列表';
             ],
             [
                 'attribute' => 'created_at',
+                'filter' => \kartik\daterange\DateRangePicker::widget([
+                    'model'=>$searchModel,
+                    'attribute'=>'created_at',
+                    'convertFormat'=>true,
+                    'pluginOptions'=>[
+                        'locale'=>[
+                            'format'=>'Y-m-d'
+                        ]
+                    ]
+                ]),
                 'format' => 'datetime',
                 'contentOptions' => [
                     'style' => 'width: 30px; white-space: nowrap;',

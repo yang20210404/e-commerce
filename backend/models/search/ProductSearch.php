@@ -19,7 +19,7 @@ class ProductSearch extends Product
     {
         return [
             [['id', 'status', 'created_by', 'updated_by'], 'integer'],
-            [['name', 'description', 'image'], 'safe'],
+            [['name', 'description', 'image', 'created_at', 'updated_at'], 'safe'],
             [['price'], 'number'],
         ];
     }
@@ -66,16 +66,28 @@ class ProductSearch extends Product
             'id' => $this->id,
             'price' => $this->price,
             'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
             'created_by' => $this->created_by,
             'updated_by' => $this->updated_by,
         ]);
+
+        $query->andFilterWhere(['between', 'created_at', $this->explodeDateTime($this->created_at)[0], $this->explodeDateTime($this->created_at)[1]])
+            ->andFilterWhere(['between', 'updated_at', $this->explodeDateTime($this->updated_at)[0], $this->explodeDateTime($this->updated_at)[1]]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'image', $this->image]);
 
         return $dataProvider;
+    }
+
+    public function explodeDateTime($dateTime) {
+        if ($dateTime) {
+            return explode(' - ', $dateTime);
+        } else {
+            return [
+                '2021-04-10',
+                date('Y-m-d', strtotime('+1 day'))
+            ];
+        }
     }
 }

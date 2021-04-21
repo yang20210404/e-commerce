@@ -18,7 +18,7 @@ class OrderSearch extends Order
     {
         return [
             [['id', 'status', 'created_by'], 'integer'],
-            [['username'], 'safe'],
+            [['username', 'created_at'], 'safe'],
             [['total_price'], 'number'],
         ];
     }
@@ -66,12 +66,24 @@ class OrderSearch extends Order
             'id' => $this->id,
             'total_price' => $this->total_price,
             'status' => $this->status,
-            'created_at' => $this->created_at,
             'created_by' => $this->created_by,
         ]);
+
+        $query->andFilterWhere(['between', 'created_at', $this->explodeDateTime($this->created_at)[0], $this->explodeDateTime($this->created_at)[1]]);
 
         $query->andFilterWhere(['like', 'username', $this->username]);
 
         return $dataProvider;
+    }
+
+    public function explodeDateTime($dateTime) {
+        if ($dateTime) {
+            return explode(' - ', $dateTime);
+        } else {
+            return [
+                '2021-04-10',
+                date('Y-m-d', strtotime('+1 day'))
+            ];
+        }
     }
 }

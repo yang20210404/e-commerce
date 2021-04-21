@@ -17,7 +17,7 @@ class m210407_060243_create_orders_table extends Migration
             'username' => $this->string()->notNull(),
             'total_price' => $this->decimal(10,2)->notNull(),
             'status' => $this->tinyInteger(1)->notNull(),
-            'created_at' => $this->integer(11),
+            'created_at' => $this->dateTime(),
             'created_by' => $this->integer(11),
         ]);
 

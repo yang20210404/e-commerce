@@ -66,11 +66,31 @@ $this->title = '商品列表';
             ],
             [
                 'attribute' => 'created_at',
+                'filter' => \kartik\daterange\DateRangePicker::widget([
+                    'model'=>$searchModel,
+                    'attribute'=>'created_at',
+                    'convertFormat'=>true,
+                    'pluginOptions'=>[
+                        'locale'=>[
+                            'format'=>'Y-m-d'
+                        ]
+                    ]
+                ]),
                 'format' => ['datetime'],
                 'contentOptions' => ['style' => 'white-space: nowrap; width: 100px']
             ],
             [
                 'attribute' => 'updated_at',
+                'filter' => \kartik\daterange\DateRangePicker::widget([
+                    'model'=>$searchModel,
+                    'attribute'=>'updated_at',
+                    'convertFormat'=>true,
+                    'pluginOptions'=>[
+                        'locale'=>[
+                            'format'=>'Y-m-d'
+                        ]
+                    ]
+                ]),
                 'format' => ['datetime'],
                 'contentOptions' => ['style' => 'white-space: nowrap; width: 100px']
             ],
