@@ -11,7 +11,8 @@ return [
         ],
         'formatter' => [
             'class' => \common\i18n\Formatter::class,
-            'datetimeFormat' => 'php:d/m/Y H:i',
+            'datetimeFormat' => 'php:Y/m/d H:i',
+            'nullDisplay' => '(無資料)'
         ]
     ],
 ];
