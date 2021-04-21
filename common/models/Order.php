@@ -57,7 +57,7 @@ class Order extends ActiveRecord
         return [
             [['username', 'total_price', 'status'], 'required'],
             [['total_price'], 'number'],
-            [['status', 'created_at', 'created_by'], 'integer'],
+            [['status', 'created_by'], 'integer'],
             [['username'], 'string', 'max' => 255],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
         ];

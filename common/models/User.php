@@ -64,7 +64,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             [['username', 'auth_key', 'password', 'created_at', 'updated_at'], 'required'],
             [['balance'], 'number'],
-            [['status', 'created_at', 'updated_at', 'last_login_at', 'admin'], 'integer'],
+            [['status', 'admin'], 'integer'],
             [['username', 'password'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
@@ -215,8 +215,10 @@ class User extends ActiveRecord implements IdentityInterface
     {
         if (parent::save($runValidation, $attributeNames)) {
             Order::updateAll(['username' => $this->username], ['created_by' => $this->id]);
+
+            return true;
         }
 
-        return true;
+        return false;
     }
 }

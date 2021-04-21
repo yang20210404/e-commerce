@@ -49,7 +49,7 @@ class CashFlow extends ActiveRecord
         return [
             [['created_by', 'type'], 'required'],
             [['money'], 'required', 'message' => '金額不得為空'],
-            [['created_by', 'type', 'created_at'], 'integer'],
+            [['created_by', 'type'], 'integer'],
             [['money'], 'integer', 'message' => '金額必須為整數'],
             [['description'], 'string'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
@@ -161,16 +161,15 @@ class CashFlow extends ActiveRecord
                     $order->status = Order::STATUS_PAID;
                     if ($order->save()) {
                         $transaction->commit();
+
+                        return true;
                     }
                 }
-            } else {
-                $error = '餘額不足，請聯繫管理員充值';
-
             }
         }
 
         $transaction->rollBack();
 
-        return $error;
+        return false;
     }
 }

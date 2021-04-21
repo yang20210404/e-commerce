@@ -91,8 +91,8 @@ class OrderController extends \frontend\base\Controller
         $id = Yii::$app->request->post('id');
 
         $cashFlow = new CashFlow();
-        if ($cashFlow->pay($id)) {
-            return $cashFlow->pay($id);
+        if (!$cashFlow->pay($id)) {
+            return '餘額不足，請聯繫管理員充值';
         }
     }
 }

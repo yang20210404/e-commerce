@@ -70,7 +70,7 @@ class Product extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['price'], 'number'],
             [['imageFile'], 'image', 'extensions' => 'png, jpg, jpeg'],
-            [['status', 'created_at', 'updated_at', 'created_by', 'updated_by', 'is_delete'], 'integer'],
+            [['status', 'created_by', 'updated_by', 'is_delete'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['image'], 'string', 'max' => 2000],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
