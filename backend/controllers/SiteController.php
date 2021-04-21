@@ -77,7 +77,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login() && Yii::$app->user->identity->admin == 1) {
-            Yii::$app->user->identity->last_login_at = time();
+            Yii::$app->user->identity->last_login_at = date('Y-m-d H:i:s', time());
             Yii::$app->user->identity->save();
 
             return $this->redirect(['/product/index']);

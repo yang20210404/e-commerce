@@ -133,7 +133,7 @@ class SiteController extends \frontend\base\Controller
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             $user = Yii::$app->user->identity;
-            $user->last_login_at = time();
+            $user->last_login_at = date('Y-m-d H:i:s', time());
             $user->save();
             if ($user->admin) {
                 Yii::$app->session->setFlash('success', '(提醒) 目前是管理員身份');
