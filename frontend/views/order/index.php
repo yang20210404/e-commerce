@@ -16,7 +16,8 @@ $this->title = '訂單';
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'pager' => [
-            'class' => \yii\bootstrap4\LinkPager::class
+            'class' => \yii\bootstrap4\LinkPager::class,
+            'options' => ['class' => 'row justify-content-center']
         ],
         'columns' => [
             [

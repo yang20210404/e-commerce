@@ -42,7 +42,10 @@ $this->title = '管理員列表';
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'pager' => ['class' => \yii\bootstrap4\LinkPager::class],
+        'pager' => [
+            'class' => \yii\bootstrap4\LinkPager::class,
+            'options' => ['class' => 'row justify-content-center']
+        ],
         'columns' => [
             [
                 'attribute' => 'id',

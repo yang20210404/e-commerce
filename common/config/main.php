@@ -12,8 +12,7 @@ return [
         'formatter' => [
             'class' => \common\i18n\Formatter::class,
             'datetimeFormat' => 'php:Y/m/d H:i',
-            'nullDisplay' => '(無資料)',
-            'timeZone' => 'Asia/Taipei'
+            'nullDisplay' => '(無資料)'
         ]
     ],
 ];

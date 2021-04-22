@@ -15,7 +15,10 @@ $this->title = '資金流水';
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'options' => ['style' => 'table-layout: fixed;'],
-        'pager' => ['class' => \yii\bootstrap4\LinkPager::class],
+        'pager' => [
+            'class' => \yii\bootstrap4\LinkPager::class,
+            'options' => ['class' => 'row justify-content-center']
+        ],
         'columns' => [
             [
                 'attribute' => 'created_at',

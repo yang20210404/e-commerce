@@ -17,7 +17,8 @@ $this->title = '訂單列表';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'pager' => [
-            'class' => \yii\bootstrap4\LinkPager::class
+            'class' => \yii\bootstrap4\LinkPager::class,
+            'options' => ['class' => 'row justify-content-center']
         ],
         'columns' => [
             [

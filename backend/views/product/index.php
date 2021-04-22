@@ -20,13 +20,14 @@ $this->title = '商品列表';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'pager' => [
-            'class' => \yii\bootstrap4\LinkPager::class
+            'class' => \yii\bootstrap4\LinkPager::class,
+            'options' => ['class' => 'row justify-content-center']
         ],
         'columns' => [
             [
                 'attribute' => 'id',
                 'contentOptions' => [
-                    'style' => 'width: 10px; font-weight: bold; vertical-align: middle;',
+                    'style' => 'width: 1%; font-weight: bold; vertical-align: middle;',
                     'align' => 'center'
                 ]
             ],
@@ -35,20 +36,20 @@ $this->title = '商品列表';
                 'content' => function($model) {
                     return Html::img($model->getImageUrl(), ['style' => 'width: 100px']);
                 },
-                'contentOptions' => ['style' => 'padding: 1px; width: 81px']
+                'contentOptions' => ['style' => 'padding: 1px; width: 1%;']
             ],
             [
                 'attribute' => 'name',
                 'content' => function($model) {
                     return \yii\helpers\BaseStringHelper::truncate($model->name, 70);
                 },
-                'contentOptions' => ['style' => 'word-break: break-all']
+                'contentOptions' => ['style' => 'word-break: break-all; width: 25%;']
             ],
             [
                 'attribute' => 'price',
                 'format' => ['currency'],
                 'contentOptions' => [
-                    'style' => 'width: 120px',
+                    'style' => 'width: 10%;',
                     'align' => 'center'
                 ]
             ],
@@ -60,7 +61,7 @@ $this->title = '商品列表';
                 ]),
                 'format' => 'productStatus',
                 'contentOptions' => [
-                    'style' => 'width: 110px',
+                    'style' => 'width: 9%;',
                     'align' => 'center'
                 ]
             ],
@@ -77,7 +78,10 @@ $this->title = '商品列表';
                     ]
                 ]),
                 'format' => ['datetime'],
-                'contentOptions' => ['style' => 'white-space: nowrap; width: 100px']
+                'contentOptions' => [
+                    'style' => 'white-space: nowrap; width: 20%;',
+                    'align' => 'center'
+                ]
             ],
             [
                 'attribute' => 'updated_at',
@@ -92,7 +96,10 @@ $this->title = '商品列表';
                     ]
                 ]),
                 'format' => ['datetime'],
-                'contentOptions' => ['style' => 'white-space: nowrap; width: 100px']
+                'contentOptions' => [
+                    'style' => 'white-space: nowrap; width: 20%;',
+                    'align' => 'center'
+                ]
             ],
             [
                 'content' => function ($model) {

@@ -17,20 +17,21 @@ $this->title = '用戶列表';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'pager' => [
-            'class' => \yii\bootstrap4\LinkPager::class
+            'class' => \yii\bootstrap4\LinkPager::class,
+            'options' => ['class' => 'row justify-content-center']
         ],
         'columns' => [
             [
                 'attribute' => 'id',
                 'contentOptions' => [
-                    'style' => 'width: 10px; vertical-align: middle; font-weight: bold;',
+                    'style' => 'width: 5%; vertical-align: middle; font-weight: bold;',
                     'align' => 'center'
                 ]
             ],
             [
                 'attribute' => 'username',
                 'contentOptions' => [
-                    'style' => 'width: 90px; vertical-align: middle',
+                    'style' => 'width: 10%; vertical-align: middle',
                     'align' => 'center'
                 ]
             ],
@@ -38,7 +39,7 @@ $this->title = '用戶列表';
                 'attribute' => 'balance',
                 'format' => 'currency',
                 'contentOptions' => [
-                    'style' => 'width: 90px; vertical-align: middle',
+                    'style' => 'width: 10%; vertical-align: middle',
                     'align' => 'center'
                 ]
             ],
@@ -56,14 +57,14 @@ $this->title = '用戶列表';
                 ]),
                 'format' => 'datetime',
                 'contentOptions' => [
-                    'style' => 'width: 10px; vertical-align: middle; white-space: nowrap;',
+                    'style' => 'width: 15%;; vertical-align: middle; white-space: nowrap;',
                     'align' => 'center'
                 ]
             ],            [
                 'attribute' => 'last_login_at',
                 'format' => 'datetime',
                 'contentOptions' => [
-                    'style' => 'width: 10px; vertical-align: middle; white-space: nowrap;',
+                    'style' => 'width: 10%; vertical-align: middle; white-space: nowrap;',
                     'align' => 'center'
                 ]
             ],
@@ -75,7 +76,7 @@ $this->title = '用戶列表';
                 ]),
                 'format' => 'userStatus',
                 'contentOptions' => [
-                    'style' => 'width: 90px; vertical-align: middle',
+                    'style' => 'width: 10%; vertical-align: middle',
                     'align' => 'center'
                 ]
             ],
@@ -86,7 +87,7 @@ $this->title = '用戶列表';
                     ]);
                 },
                 'contentOptions' => [
-                    'style' => 'width: 90px; vertical-align: middle',
+                    'style' => 'width: 6%; vertical-align: middle',
                     'align' => 'center'
                 ]
             ],

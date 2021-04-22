@@ -31,7 +31,8 @@ $this->title = '商品類別';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'pager' => [
-            'class' => \yii\bootstrap4\LinkPager::class
+            'class' => \yii\bootstrap4\LinkPager::class,
+            'options' => ['class' => 'row justify-content-center']
         ],
         'columns' => [
             [
